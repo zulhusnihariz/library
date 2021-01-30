@@ -11,7 +11,53 @@
 		/>
 		<title>Library</title>
 	</head>
+
 	<body>
+		<header><h1>myLib</h1></header>
+		<div class="main-container">
+			<form class="input-container">
+				<label for="book-title">Title</label>
+				<input
+					type="text"
+					name="book-title"
+					id="book-title"
+					placeholder="Title of the book"
+					required
+				/>
+				<label for="book-author">Author</label>
+				<input
+					type="text"
+					name="book-author"
+					id="book-author"
+					placeholder="Author of the book"
+					required
+				/>
+				<label for="book-pages">Pages</label>
+				<input
+					type="number"
+					name="book-pages"
+					id="book-pages"
+					placeholder="Number of pages"
+					min="30"
+				/>
+				<ul>
+					<li>
+						<input type="radio" name="readStatus" value="Have read" />
+						Have read
+					</li>
+					<li>
+						<input type="radio" name="readStatus" value="Have not read yet" />
+						Have not read yet
+					</li>
+				</ul>
+
+				<div class="input-buttons">
+					<button id="add-book">Add Book</button>
+				</div>
+			</form>
+
+			<section class="display-container"></section>
+		</div>
 		<script src="/js/main.js"></script>
 	</body>
 </html>

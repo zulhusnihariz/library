@@ -13,4 +13,50 @@
 
 body {
 	font-family: "Poppins", sans-serif;
+	background-color: #f2e9e4;
+	color: #22223b;
+}
+
+body header {
+	padding: 15px;
+	font-weight: 700;
+	font-size: 1.5rem;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+}
+
+.input-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.input-container input,
+ul {
+	max-width: 300px;
+	margin-bottom: 10px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.display-container {
+	color: #f2e9e4;
+	font-weight: 500;
+	display: grid;
+	grid-gap: 30px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
+	margin-top: 30px;
+	text-align: center;
+}
+
+.booksCard {
+	padding-top: 30px;
+	height: 250px;
+	width: 250px;
 }
