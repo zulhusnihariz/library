@@ -59,4 +59,32 @@ ul {
 	padding-top: 30px;
 	height: 250px;
 	width: 250px;
+	position: relative;
+
+	z-index: 1;
+}
+
+.booksCard::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+
+	background-color: #eff1f3;
+	transition: transform 200ms ease-in-out;
+	transform: scaleX(0);
+}
+
+.booksCard:hover::before,
+.booksCard:focus::before {
+	transform: scaleX(1);
+}
+
+.booksCard:hover {
+	transform: translateY(-1rem);
+	color: #22223b;
+	font: 700;
 }
