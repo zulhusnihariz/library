@@ -116,6 +116,25 @@ function createButton(booksCard) {
 	let statusButton = document.querySelectorAll("#statusButton");
 	let deleteButton = document.querySelectorAll("#deleteButton");
 
+	for (const btns in statusButton) {
+		statusButton[btns].addEventListener("click", e => {
+			//get content of e.target Parent
+			let p = e.target.parentElement;
+			let parentNodeTitle = p.childNodes[0].textContent;
+			let authorPagesElement = p.childNodes[1];
+			let currentRead = authorPagesElement.childNodes[4];
+
+			if (currentRead.textContent == "Have not read yet") {
+				currentRead.textContent = "Have read";
+				changeReadStatusInLibrary(parentNodeTitle, currentRead);
+			} else if (currentRead.textContent == "Have read") {
+				currentRead.textContent = "Have not read yet";
+			}
+
+			console.log(myLibrary);
+		});
+	}
+
 	// Assign add event listener to every delete button
 	for (const btns in deleteButton) {
 		deleteButton[btns].addEventListener("click", e => {
@@ -127,6 +146,15 @@ function createButton(booksCard) {
 			e.target.parentNode.remove();
 			console.log(myLibrary);
 		});
+	}
+}
+
+function changeReadStatusInLibrary(parentNodeTitle, currentRead) {
+	// loop through myLibrary by index; if title is equal to parentElement's title, remove it
+	for (i = 0; i < myLibrary.length; i++) {
+		if (myLibrary[i]["title"] == parentNodeTitle) {
+			myLibrary[i]["readStatus"] = currentRead.textContent;
+		}
 	}
 }
 
