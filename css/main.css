@@ -88,6 +88,8 @@ ul {
 	color: #22223b;
 }
 
-#hiddenButton {
+#statusButton,
+#deleteButton {
 	display: none;
+	margin: 10px;
 }

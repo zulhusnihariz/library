@@ -1,6 +1,5 @@
 let bookRead = document.querySelectorAll('input[name = "readStatus"]');
 const displayContainer = document.querySelector(".display-container");
-
 const addButton = document.getElementById("add-book");
 
 // Empty array to store information about books
@@ -19,7 +18,7 @@ Book.prototype.addBookToLibrary = function (bookName) {
 	myLibrary.push(bookName);
 };
 
-// create a card for each book in myLibrary and display on screen
+// create a card for each book in myLibrary and display onload
 function displayBooks() {
 	let booksCard;
 
@@ -59,7 +58,7 @@ function showNewBook() {
 	showAuthorPages(booksCard);
 	createButton(booksCard);
 }
-
+// insert book author & number of pages in the card (in new div)
 function showAuthorPages(booksCard) {
 	let authorPages;
 	// create another div within booksCard to display author & pages
@@ -91,18 +90,53 @@ function createButton(booksCard) {
 	for (const books in myLibrary) {
 		btn = document.createElement("BUTTON"); // Create a <button> element
 		booksCard[books].appendChild(btn);
-		btn.innerHTML = "Update"; // Insert text
-		btn.id = "hiddenButton";
+		btn.innerHTML = "Status"; // Insert text
+		btn.id = "statusButton";
 
+		btn2 = document.createElement("BUTTON"); // Create a <button> element
+		booksCard[books].appendChild(btn2);
+		btn2.innerHTML = "Delete"; // Insert text
+		btn2.id = "deleteButton";
+
+		// show author, pages, and button when hover over card
 		booksCard[books].addEventListener("mouseover", e => {
-			e.target.querySelector("#hiddenButton").style.display = "inline";
+			e.target.querySelector("#statusButton").style.display = "inline";
+			e.target.querySelector("#deleteButton").style.display = "inline";
 			e.target.querySelector(".authorPages").style.display = "block";
 		});
 
+		// hide author, pages, and button when hover away from  card
 		booksCard[books].addEventListener("mouseleave", e => {
-			e.target.querySelector("#hiddenButton").style.display = "none";
+			e.target.querySelector("#statusButton").style.display = "none";
+			e.target.querySelector("#deleteButton").style.display = "none";
 			e.target.querySelector(".authorPages").style.display = "none";
 		});
+	}
+
+	let statusButton = document.querySelectorAll("#statusButton");
+	let deleteButton = document.querySelectorAll("#deleteButton");
+
+	// Assign add event listener to every delete button
+	for (const btns in deleteButton) {
+		deleteButton[btns].addEventListener("click", e => {
+			//get content of e.target Parent
+			let p = e.target.parentElement;
+			let parentNodeTitle = p.childNodes[0].textContent;
+			//get content title
+			removeBookFromLibrary(parentNodeTitle);
+			e.target.parentNode.remove();
+			console.log(myLibrary);
+		});
+	}
+}
+
+// Remove book from myLibrary when delete button is pressed
+function removeBookFromLibrary(parentNodeTitle) {
+	// loop through myLibrary by index; if title is equal to parentElement's title, remove it
+	for (i = 0; i < myLibrary.length; i++) {
+		if (myLibrary[i]["title"] == parentNodeTitle) {
+			myLibrary.splice(i, 1);
+		}
 	}
 }
 
@@ -120,7 +154,6 @@ addButton.addEventListener("click", e => {
 	let bookTitle;
 	let bookAuthor;
 	let bookPages;
-
 	bookTitle = document.getElementById("book-title").value;
 	bookAuthor = document.getElementById("book-author").value;
 	bookPages = document.getElementById("book-pages").value;
@@ -133,7 +166,6 @@ addButton.addEventListener("click", e => {
 	}
 
 	newBook = new Book(bookTitle, bookAuthor, bookPages, readStatus);
-
 	newBook.addBookToLibrary(newBook);
 	showNewBook();
 	e.preventDefault();
