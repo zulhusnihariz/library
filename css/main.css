@@ -74,7 +74,7 @@ ul {
 	z-index: -1;
 
 	background-color: #eff1f3;
-	transition: transform 200ms ease-in-out;
+	transition: transform 100ms ease-in-out;
 	transform: scaleX(0);
 }
 
@@ -86,5 +86,8 @@ ul {
 .booksCard:hover {
 	transform: translateY(-1rem);
 	color: #22223b;
-	font: 700;
+}
+
+#hiddenButton {
+	display: none;
 }
