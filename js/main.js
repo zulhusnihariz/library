@@ -114,9 +114,11 @@ function createButton(booksCard) {
 	}
 
 	let statusButton = document.querySelectorAll("#statusButton");
+	console.log(statusButton);
 	let deleteButton = document.querySelectorAll("#deleteButton");
+	console.log(deleteButton);
 
-	for (const btns in statusButton) {
+	for (const btns in myLibrary) {
 		statusButton[btns].addEventListener("click", e => {
 			//get content of e.target Parent
 			let p = e.target.parentElement;
@@ -133,12 +135,11 @@ function createButton(booksCard) {
 
 			console.log(myLibrary);
 		});
-	}
 
-	// Assign add event listener to every delete button
-	for (const btns in deleteButton) {
+		// Assign add event listener to every delete button
 		deleteButton[btns].addEventListener("click", e => {
 			//get content of e.target Parent
+			console.log("hello");
 			let p = e.target.parentElement;
 			let parentNodeTitle = p.childNodes[0].textContent;
 			//get content title
@@ -194,14 +195,23 @@ addButton.addEventListener("click", e => {
 	}
 
 	newBook = new Book(bookTitle, bookAuthor, bookPages, readStatus);
+
 	newBook.addBookToLibrary(newBook);
 	showNewBook();
 	e.preventDefault();
+	addToLocalStorage(newBook);
+
 	clearField();
 	console.log(myLibrary);
 });
 
+function addToLocalStorage(bookVar) {
+	console.log("savedin storage");
+	localStorage.setItem(localStorage.length + 1, JSON.stringify(bookVar));
+}
+
 // temporary
+
 const book1 = new Book(
 	"12 Rules for Life",
 	"Jordan Peterson",
@@ -243,3 +253,9 @@ book6.addBookToLibrary(book6);
 window.onload = displayBooks;
 
 console.log("refreshed");
+console.log(localStorage.length);
+// localStorage.setItem(localStorage.length + 1, JSON.stringify(book1));
+// localStorage.setItem(localStorage.length + 1, JSON.stringify(book2));
+// localStorage.setItem(localStorage.length + 1, JSON.stringify(book3));
+// localStorage.setItem(localStorage.length + 1, JSON.stringify(book4));
+// localStorage.setItem(localStorage.length + 1, JSON.stringify(book5));
